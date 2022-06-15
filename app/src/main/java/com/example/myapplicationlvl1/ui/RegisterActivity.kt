@@ -2,21 +2,23 @@ package com.example.myapplicationlvl1.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Patterns
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
-import com.example.myapplicationlvl1.ProfileActivity
+import androidx.core.widget.doAfterTextChanged
 import com.example.myapplicationlvl1.R
 import com.example.myapplicationlvl1.data.storage.CacheDataSource
 import com.example.myapplicationlvl1.databinding.ActivityRegisterBinding
 import com.example.myapplicationlvl1.utils.Constants
 import com.example.myapplicationlvl1.utils.ParsingEmail
 import com.example.myapplicationlvl1.utils.Validator
+import com.example.myapplicationlvl1.utils.extensions.capitalizeWords
 
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var dataSource: CacheDataSource
+    private lateinit var textWatcherEmail: TextWatcher
+    private lateinit var textWatcherPassword: TextWatcher
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataSource = CacheDataSource(this)
@@ -25,37 +27,51 @@ class RegisterActivity : AppCompatActivity() {
         setListeners()
     }
 
-    private fun setListeners() {
+    override fun onResume() {
+        super.onResume()
         with(binding) {
-            textEditTextEmail.doOnTextChanged { _, _, _, _ ->
+            textWatcherEmail = textEditTextEmail.doAfterTextChanged {
                 textInputLayoutEmail.isErrorEnabled = false
             }
-            textEditTextPassword.doOnTextChanged { _, _, _, _ ->
+
+            textWatcherPassword = textEditTextPassword.doAfterTextChanged {
                 textInputLayoutPassword.isErrorEnabled = false
             }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.textEditTextEmail.removeTextChangedListener(textWatcherEmail)
+        binding.textEditTextPassword.removeTextChangedListener(textWatcherPassword)
+    }
+
+    private fun setListeners() {
+        with(binding) {
+
             buttonRegister.setOnClickListener {
 
                 val email = textEditTextEmail.text.toString()
                 val password = textEditTextPassword.text.toString()
 
-                val emailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                val emailValid = Validator.isEmailValid(email)
                 val passwordValid = Validator.isPasswordValid(password)
 
-                textInputLayoutEmail.error = if (!emailValid) {
-                    getString(R.string.incorrect_email)
-                } else ""
-                textInputLayoutPassword.error = if (!passwordValid) {
-                    getString(R.string.incorrect_password)
-                } else ""
+                if (!emailValid) {
+                    textInputLayoutEmail.error = getString(R.string.incorrect_email)
+                }
+                if (!passwordValid) {
+                    textInputLayoutPassword.error = getString(R.string.incorrect_password)
+                }
 
                 if (emailValid && passwordValid) {
-                    if (checkBoxRegistration.isEnabled) {
+                    if (checkBoxRegistration.isChecked) {
                         with(dataSource) {
                             saveString(Constants.LOGIN_KEY, email)
                             saveString(Constants.PASSWORD_KEY, password)
                         }
                     }
-                    goToProfile()
+                    goToProfile(email)
                 }
             }
         }
@@ -65,20 +81,14 @@ class RegisterActivity : AppCompatActivity() {
         val email = dataSource.getString(Constants.LOGIN_KEY, "")
         val password = dataSource.getString(Constants.PASSWORD_KEY, "")
         if (email != "" && password != "") {
-            goToProfile()
+            goToProfile(email.toString())
         }
     }
 
-//    private fun errorChecker(valid: Boolean, message: Int): String {
-//        return if (!valid) {
-//            getString(message)
-//        } else ""
-//    }
-
-    private fun goToProfile() {
+    private fun goToProfile(email: String) {
         val intent = Intent(this@RegisterActivity, ProfileActivity::class.java)
-        val textEntered = ParsingEmail.parseEmailToFullName(binding.textEditTextEmail.text.toString())
-        intent.putExtra(Intent.EXTRA_TEXT, textEntered)
+        val textEntered = ParsingEmail.parseEmailToFullName(email).capitalizeWords()
+        intent.putExtra(Constants.LOGIN_KEY, textEntered)
         startActivity(intent)
         finish()
     }
