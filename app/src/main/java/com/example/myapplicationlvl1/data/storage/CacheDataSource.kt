@@ -1,4 +1,4 @@
-package com.example.myapplicationlvl1
+package com.example.myapplicationlvl1.data.storage
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

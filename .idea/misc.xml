@@ -19,7 +19,7 @@
         <entry key="..\:/MyApplicationlvl1/app/src/main/res/drawable/kgorbach_circle.xml" value="0.1695" />
         <entry key="..\:/MyApplicationlvl1/app/src/main/res/drawable/vk_vec_icon.xml" value="0.2265" />
         <entry key="..\:/MyApplicationlvl1/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/MyApplicationlvl1/app/src/main/res/layout/activity_profile.xml" value="0.4" />
+        <entry key="..\:/MyApplicationlvl1/app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="..\:/MyApplicationlvl1/app/src/main/res/layout/activity_register.xml" value="0.6" />
         <entry key="..\:/MyApplicationlvl1/app/src/main/res/layout/fragment_register.xml" value="0.264" />
         <entry key="..\:/MyApplicationlvl1/app/src/main/res/layout/user_log_in.xml" value="0.2" />
@@ -31,7 +31,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="16" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_18_PREVIEW" project-jdk-name="16" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

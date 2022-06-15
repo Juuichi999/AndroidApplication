@@ -1,15 +1,18 @@
-package com.example.myapplicationlvl1
+package com.example.myapplicationlvl1.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
+import com.example.myapplicationlvl1.ProfileActivity
+import com.example.myapplicationlvl1.R
+import com.example.myapplicationlvl1.data.storage.CacheDataSource
 import com.example.myapplicationlvl1.databinding.ActivityRegisterBinding
-import com.google.android.material.textfield.TextInputEditText
+import com.example.myapplicationlvl1.utils.Constants
+import com.example.myapplicationlvl1.utils.ParsingEmail
+import com.example.myapplicationlvl1.utils.Validator
 
-const val LOGIN_KEY = "LOGIN_KEY"
-const val PASSWORD_KEY = "PASSWORD_KEY"
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -24,17 +27,20 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setListeners() {
         with(binding) {
-            textEditTextEmail.listenChanges { textInputLayoutEmail.error = "" }
-            textEditTextPassword.listenChanges { textInputLayoutPassword.error = "" }
+            textEditTextEmail.doOnTextChanged { _, _, _, _ ->
+                textInputLayoutEmail.isErrorEnabled = false
+            }
+            textEditTextPassword.doOnTextChanged { _, _, _, _ ->
+                textInputLayoutPassword.isErrorEnabled = false
+            }
             buttonRegister.setOnClickListener {
 
                 val email = textEditTextEmail.text.toString()
                 val password = textEditTextPassword.text.toString()
-                val regexPassword =
-                    """^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([@#${'$'}%!\-_?&])?(?=\S+${'$'}).{8,24}"""
-                        .toRegex()
+
                 val emailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-                val passwordValid = regexPassword.matches(password)
+                val passwordValid = Validator.isPasswordValid(password)
+
                 textInputLayoutEmail.error = if (!emailValid) {
                     getString(R.string.incorrect_email)
                 } else ""
@@ -45,8 +51,8 @@ class RegisterActivity : AppCompatActivity() {
                 if (emailValid && passwordValid) {
                     if (checkBoxRegistration.isEnabled) {
                         with(dataSource) {
-                            saveString(LOGIN_KEY, email)
-                            saveString(PASSWORD_KEY, password)
+                            saveString(Constants.LOGIN_KEY, email)
+                            saveString(Constants.PASSWORD_KEY, password)
                         }
                     }
                     goToProfile()
@@ -56,8 +62,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun autoLogin() {
-        val email = dataSource.getString(LOGIN_KEY, "")
-        val password = dataSource.getString(PASSWORD_KEY, "")
+        val email = dataSource.getString(Constants.LOGIN_KEY, "")
+        val password = dataSource.getString(Constants.PASSWORD_KEY, "")
         if (email != "" && password != "") {
             goToProfile()
         }
@@ -71,33 +77,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun goToProfile() {
         val intent = Intent(this@RegisterActivity, ProfileActivity::class.java)
-        val textEntered = parseEmailToFullName(binding.textEditTextEmail.text.toString())
+        val textEntered = ParsingEmail.parseEmailToFullName(binding.textEditTextEmail.text.toString())
         intent.putExtra(Intent.EXTRA_TEXT, textEntered)
         startActivity(intent)
         finish()
     }
 
-    private fun TextInputEditText.listenChanges(block: (text: String) -> Unit) {
-        addTextChangedListener(object : SimpleTextWatcher() {
-            override fun afterTextChanged(p0: Editable?) {
-                block.invoke(p0.toString())
-            }
-        })
-    }
 }
 
-fun parseEmailToFullName(email: String): String {
-    if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-        val emailWithout = email.substring(0, email.indexOf("@"))
-        val array: List<String> = emailWithout.split(".")
-        return if (array.size == 2) {
-            "${array[0]} ${array[1]}"
-        } else {
-            emailWithout
-        }
-    }
-    return email
-}
 
-private fun String.capitalizeWords() = split(" ")
-    .joinToString(" ") { it -> it.lowercase().replaceFirstChar { it.uppercase() } }
+

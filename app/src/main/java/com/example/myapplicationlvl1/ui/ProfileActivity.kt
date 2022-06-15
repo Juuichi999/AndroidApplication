@@ -1,8 +1,7 @@
 package com.example.myapplicationlvl1
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplicationlvl1.databinding.ActivityProfileBinding
 import com.example.myapplicationlvl1.databinding.ActivityProfileBinding.inflate
 
