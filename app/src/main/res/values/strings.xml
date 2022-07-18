@@ -19,4 +19,6 @@
     <string name="sign_in">Sign in</string>
     <string name="incorrect_email">Incorrect E-Mail address</string>
     <string name="incorrect_password">Your password must include a minimum of 8 characters.</string>
+    <string name="career">Career</string>
+    <string name="home_address">Home address</string>
 </resources>
