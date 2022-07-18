@@ -13,5 +13,6 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = inflate(layoutInflater).also { setContentView(it.root) }
         val name = intent.getStringExtra(Constants.LOGIN_KEY)
+        binding.fullNameTextView.text = name
     }
 }

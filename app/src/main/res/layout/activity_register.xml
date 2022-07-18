@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#242235"
+    android:background="@color/darkBlue"
     android:padding="16dp">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -13,22 +13,22 @@
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/hello2"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="@dimen/textSize_24sp"
         app:layout_constraintBottom_toTopOf="@id/textViewInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/guidelineSecond"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
+        android:layout_marginVertical="@dimen/marginOffset_8dp"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/reg_info"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="@dimen/textSize_12sp"
         app:layout_constraintBottom_toTopOf="@id/textInputLayoutEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,12 +40,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/e_mail"
-        android:textColorHint="@color/gray"
-        android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+        android:textColorHint="@color/lightGray"
+        app:boxStrokeColor="@color/lightGray"
+        app:endIconTint="@color/lightGray"
         app:errorEnabled="true"
         app:expandedHintEnabled="false"
         app:hintTextAppearance="@style/TextLabel"
-        app:layout_constraintBottom_toTopOf="@id/text_input_layout_password"
+        app:layout_constraintBottom_toTopOf="@id/textInputLayoutPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewInfo">
@@ -54,22 +55,23 @@
             android:id="@+id/textEditTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#242235"
+            android:background="@color/darkBlue"
             android:inputType="textEmailAddress"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/lightGray" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout_password"
+        android:id="@+id/textInputLayoutPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/password"
-        android:textColorHint="@color/gray"
+        android:textColorHint="@color/lightGray"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
         app:expandedHintEnabled="false"
         app:hintTextAppearance="@style/TextLabel"
-        app:layout_constraintBottom_toTopOf="@id/check_box_registration"
+        app:layout_constraintBottom_toTopOf="@id/checkBoxRegistration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail">
@@ -78,65 +80,66 @@
             android:id="@+id/textEditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#242235"
+            android:background="@color/darkBlue"
+            android:foregroundTint="#FFFFFF"
             android:inputType="textPassword"
             android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/check_box_registration"
+        android:id="@+id/checkBoxRegistration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/white"
         android:text="@string/ch_box_reg"
-        android:textColor="@color/gray"
-        app:layout_constraintBottom_toTopOf="@id/guideline1"
+        android:textColor="@color/lightGray"
+        app:layout_constraintBottom_toTopOf="@id/guidelineFirst"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_layout_password" />
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_google"
+        android:id="@+id/googleButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/custom_button2"
+        android:background="@drawable/transparent_black_button_small"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/google_b"
-        android:textColor="#18181F"
-        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSize_16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/textViewOr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineFirst"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewOr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/marginOffset_8dp"
+        android:layout_marginBottom="@dimen/marginOffset_8dp"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/or"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/button_register"
+        app:layout_constraintBottom_toTopOf="@id/buttonRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_google" />
+        app:layout_constraintTop_toBottomOf="@id/googleButton" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_register"
+        android:id="@+id/buttonRegister"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/custom_button3"
+        android:background="@drawable/transparent_orange_button"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/register"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/textSize_16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/textViewAgreement"
         app:layout_constraintEnd_toEndOf="parent"
@@ -145,14 +148,14 @@
         app:layout_constraintTop_toBottomOf="@id/textViewOr" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
+        android:id="@+id/guidelineFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.64" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guidelineSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -162,18 +165,18 @@
         android:id="@+id/textViewAgreement"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/marginOffset_8dp"
+        android:layout_marginBottom="@dimen/marginOffset_8dp"
         android:fontFamily="@font/open_sans_semibold"
         android:gravity="center"
         android:maxLines="2"
         android:text="@string/agreement"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="@dimen/textSize_12sp"
         app:layout_constraintBottom_toTopOf="@id/textViewHaveAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_register"
+        app:layout_constraintTop_toBottomOf="@id/buttonRegister"
         app:layout_constraintWidth_percent="0.66" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -184,8 +187,8 @@
         android:gravity="center_vertical"
         android:maxLines="2"
         android:text="@string/have_account"
-        android:textColor="@color/gray"
-        android:textSize="14sp"
+        android:textColor="@color/lightGray"
+        android:textSize="@dimen/textSize_14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/signIn"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -196,11 +199,11 @@
         android:id="@+id/signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/marginOffset_8dp"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/sign_in"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="@dimen/textSize_14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
