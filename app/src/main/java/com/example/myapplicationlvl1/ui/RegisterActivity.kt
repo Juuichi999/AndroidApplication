@@ -5,24 +5,27 @@ import android.os.Bundle
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.lifecycleScope
 import com.example.myapplicationlvl1.R
 import com.example.myapplicationlvl1.data.storage.CacheDataSource
+import com.example.myapplicationlvl1.data.storage.DataSource
 import com.example.myapplicationlvl1.databinding.ActivityRegisterBinding
 import com.example.myapplicationlvl1.utils.Constants
 import com.example.myapplicationlvl1.utils.ParsingEmail
 import com.example.myapplicationlvl1.utils.Validator
 import com.example.myapplicationlvl1.utils.extensions.capitalizeWords
+import kotlinx.coroutines.launch
 
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var dataSource: CacheDataSource
     private lateinit var textWatcherEmail: TextWatcher
+    private lateinit var dataSource: DataSource
     private lateinit var textWatcherPassword: TextWatcher
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dataSource = CacheDataSource(this)
         binding = ActivityRegisterBinding.inflate(layoutInflater).also { setContentView(it.root) }
+        dataSource = CacheDataSource(this)
         autoLogin()
         setListeners()
     }
@@ -42,8 +45,11 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        binding.textEditTextEmail.removeTextChangedListener(textWatcherEmail)
-        binding.textEditTextPassword.removeTextChangedListener(textWatcherPassword)
+        binding.apply {
+            textEditTextEmail.removeTextChangedListener(textWatcherEmail)
+            textEditTextPassword.removeTextChangedListener(textWatcherPassword)
+        }
+
     }
 
     private fun setListeners() {
@@ -65,10 +71,16 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 if (emailValid && passwordValid) {
-                    if (checkBoxRegistration.isChecked) {
-                        with(dataSource) {
-                            saveString(Constants.LOGIN_KEY, email)
-                            saveString(Constants.PASSWORD_KEY, password)
+                    if (rememberUserCheckBox.isChecked) {
+//                        with(dataSource) {
+//                            saveString(Constants.LOGIN_KEY, email)
+//                            saveString(Constants.PASSWORD_KEY, password)
+//                        }
+                        lifecycleScope.launch {
+                            with(dataSource) {
+                                saveString(Constants.LOGIN_KEY, email)
+                                saveString(Constants.PASSWORD_KEY, password)
+                            }
                         }
                     }
                     goToProfile(email)
@@ -78,10 +90,12 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun autoLogin() {
-        val email = dataSource.getString(Constants.LOGIN_KEY, "")
-        val password = dataSource.getString(Constants.PASSWORD_KEY, "")
-        if (email != "" && password != "") {
-            goToProfile(email.toString())
+        lifecycleScope.launch {
+            val email = dataSource.getString(Constants.LOGIN_KEY)
+            val password = dataSource.getString(Constants.PASSWORD_KEY)
+            if (email != null && password != null) {
+                goToProfile(email.toString())
+            }
         }
     }
 

@@ -2,8 +2,10 @@ package com.example.myapplicationlvl1.data.storage
 
 interface DataSource {
 
-    fun saveString(key: String, value: String)
+    //    fun saveString(key: String, value: String)
 
-    fun getString(key: String, default: String): String?
+    suspend fun saveString(key: String, value: String)
+
+    suspend fun getString(key: String): String?
 
 }
