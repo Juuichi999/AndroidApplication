@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="TextLabel">
         <item name="android:textColorHint">@color/lightGray</item>
         <item name="android:textSize">@dimen/textSize_16sp</item>
     </style>
 
+    <style name="TextUserInfoProfile">
+        <item name="android:textColor">@color/lightGray</item>
+        <item name="android:textSize">@dimen/textSize_14sp</item>
+    </style>
+
+    <style name="defaultButton" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/textSize_16sp</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:button">@drawable/button_rounded</item>
+    </style>
+
+    <style name="outlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="android:button">@drawable/button_outline_rounded</item>
+    </style>
 </resources>

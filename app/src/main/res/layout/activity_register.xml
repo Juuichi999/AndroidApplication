@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkBlue"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:splitMotionEvents="false">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewHello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineSecond"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,7 +72,7 @@
         app:errorEnabled="true"
         app:expandedHintEnabled="false"
         app:hintTextAppearance="@style/TextLabel"
-        app:layout_constraintBottom_toTopOf="@id/checkBoxRegistration"
+        app:layout_constraintBottom_toTopOf="@id/rememberUserCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail">
@@ -88,7 +89,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkBoxRegistration"
+        android:id="@+id/rememberUserCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/white"
@@ -98,25 +99,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/googleButton"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signInGoogleButton"
+        style="@style/defaultButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/transparent_black_button_small"
         android:backgroundTint="@color/white"
-        android:fontFamily="@font/open_sans_semibold"
         android:text="@string/google_b"
         android:textColor="@color/black"
-        android:textSize="@dimen/textSize_16sp"
         android:textStyle="bold"
+        app:icon="@drawable/google_icon"
+        app:iconGravity="textStart"
         app:layout_constraintBottom_toTopOf="@id/textViewOr"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineFirst"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewOr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,23 +130,23 @@
         app:layout_constraintBottom_toTopOf="@id/buttonRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/googleButton" />
+        app:layout_constraintTop_toBottomOf="@id/signInGoogleButton" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonRegister"
+        style="@style/outlineButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/transparent_orange_button"
-        android:fontFamily="@font/open_sans_semibold"
         android:text="@string/register"
         android:textColor="@color/white"
         android:textSize="@dimen/textSize_16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/textViewAgreement"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintHeight_percent="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewOr" />
+        app:layout_constraintTop_toBottomOf="@id/textViewOr"
+        app:strokeColor="@color/orange" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineFirst"
@@ -161,7 +162,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.23" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewAgreement"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -179,7 +180,7 @@
         app:layout_constraintTop_toBottomOf="@id/buttonRegister"
         app:layout_constraintWidth_percent="0.66" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -195,7 +196,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAgreement" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

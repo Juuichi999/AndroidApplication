@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:splitMotionEvents="false"
     tools:context=".ui.ProfileActivity">
 
     <View
@@ -13,8 +14,7 @@
         android:background="@color/darkBlue"
         app:layout_constraintBottom_toTopOf="@id/viewBottomContainer"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="0.5"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_weight="0.5" />
 
     <View
         android:id="@+id/viewBottomContainer"
@@ -23,10 +23,9 @@
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/buttonEditProfile"
         app:layout_constraintTop_toBottomOf="@id/viewToContainer"
-        app:layout_constraintVertical_weight="0.5"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_weight="0.5" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSettings" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/fullNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,38 +58,37 @@
         android:textColor="@color/white"
         android:textSize="@dimen/textSize_18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/text_view_carrier"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCarrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/circleImageView"
+        tools:text="@tools:sample/full_names" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text_view_carrier"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewCarrier"
+        style="@style/TextUserInfoProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/career"
-        android:textColor="@color/lightGray"
-        android:textSize="@dimen/textSize_14sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewHomeAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullNameTextView" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewHomeAddress"
+        style="@style/TextUserInfoProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/home_address"
-        android:textColor="@color/lightGray"
-        android:textSize="@dimen/textSize_14sp"
         app:layout_constraintBottom_toBottomOf="@id/viewToContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_carrier" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCarrier" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewProfileInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,44 +102,42 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineThird"
         app:layout_constraintVertical_bias="0.11" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonEditProfile"
+        style="@style/outlineButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/transparent_black_button_big"
-        android:fontFamily="@font/open_sans_semibold"
         android:text="@string/edit_profile"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="@dimen/textSize_14sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonMyContacts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintHeight_percent="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewProfileInfo"
         app:layout_constraintVertical_bias="0.95"
-        app:layout_constraintWidth_percent="0.78" />
+        app:layout_constraintWidth_percent="0.84"
+        app:strokeColor="@color/black" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonMyContacts"
+        style="@style/defaultButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/transparent_black_button_small"
         android:backgroundTint="@color/orange"
-        android:fontFamily="@font/open_sans_semibold"
         android:text="@string/view_my_contacts"
         android:textColor="@color/white"
-        android:textSize="@dimen/textSize_16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintHeight_percent="0.09"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buttonEditProfile"
-        app:layout_constraintWidth_percent="0.78" />
+        app:layout_constraintWidth_percent="0.84" />
 
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/facebookVecIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,7 +148,7 @@
         app:layout_constraintTop_toTopOf="@+id/viewBottomContainer"
         app:srcCompat="@drawable/f_vec_icon" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/linkedInVecIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -161,7 +157,7 @@
         app:layout_constraintTop_toTopOf="@+id/facebookVecIcon"
         app:srcCompat="@drawable/link_in_vec_icon" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/vkVecIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
