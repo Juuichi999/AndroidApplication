@@ -6,11 +6,8 @@ object Validator {
     }
 
     fun isPasswordValid(password: String): Boolean {
-        val regexPassword =
-            """^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([@#${'$'}%!\-_?&])?(?=\S+${'$'}).{8,24}"""
-                .toRegex()
+        val regexPassword = Constants.REGEX_PASSWORD.toRegex()
         return regexPassword.matches(password)
     }
-
 
 }

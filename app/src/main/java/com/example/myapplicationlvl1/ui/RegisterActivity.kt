@@ -15,17 +15,17 @@ import com.example.myapplicationlvl1.utils.ParsingEmail
 import com.example.myapplicationlvl1.utils.Validator
 import com.example.myapplicationlvl1.utils.extensions.capitalizeWords
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var textWatcherEmail: TextWatcher
-    private lateinit var dataSource: DataSource
+    private val dataSource: DataSource by lazy { CacheDataSource(this) }
     private lateinit var textWatcherPassword: TextWatcher
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater).also { setContentView(it.root) }
-        dataSource = CacheDataSource(this)
         autoLogin()
         setListeners()
     }
@@ -72,10 +72,6 @@ class RegisterActivity : AppCompatActivity() {
 
                 if (emailValid && passwordValid) {
                     if (rememberUserCheckBox.isChecked) {
-//                        with(dataSource) {
-//                            saveString(Constants.LOGIN_KEY, email)
-//                            saveString(Constants.PASSWORD_KEY, password)
-//                        }
                         lifecycleScope.launch {
                             with(dataSource) {
                                 saveString(Constants.LOGIN_KEY, email)
@@ -90,7 +86,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun autoLogin() {
-        lifecycleScope.launch {
+        runBlocking { //crutch
             val email = dataSource.getString(Constants.LOGIN_KEY)
             val password = dataSource.getString(Constants.PASSWORD_KEY)
             if (email != null && password != null) {
