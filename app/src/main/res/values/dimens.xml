@@ -7,4 +7,5 @@
     <dimen name="textSize_16sp">16sp</dimen>
     <dimen name="textSize_12sp">12sp</dimen>
     <dimen name="textSize_18sp">18sp</dimen>
+    <dimen name="marginTop20dp">20dp</dimen>
 </resources>
