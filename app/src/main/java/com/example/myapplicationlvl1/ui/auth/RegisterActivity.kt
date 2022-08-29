@@ -1,4 +1,4 @@
-package com.example.myapplicationlvl1.ui
+package com.example.myapplicationlvl1.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import com.example.myapplicationlvl1.R
 import com.example.myapplicationlvl1.data.storage.CacheDataSource
 import com.example.myapplicationlvl1.data.storage.DataSource
 import com.example.myapplicationlvl1.databinding.ActivityRegisterBinding
+import com.example.myapplicationlvl1.ui.profile.ProfileActivity
 import com.example.myapplicationlvl1.utils.Constants
 import com.example.myapplicationlvl1.utils.ParsingEmail
 import com.example.myapplicationlvl1.utils.Validator
@@ -33,12 +34,12 @@ class RegisterActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         with(binding) {
-            textWatcherEmail = textEditTextEmail.doAfterTextChanged {
-                textInputLayoutEmail.isErrorEnabled = false
+            textWatcherEmail = emailTextEditText.doAfterTextChanged {
+                emailTextInputLayout.isErrorEnabled = false
             }
 
-            textWatcherPassword = textEditTextPassword.doAfterTextChanged {
-                textInputLayoutPassword.isErrorEnabled = false
+            textWatcherPassword = passwordTextEditText.doAfterTextChanged {
+                passwordTextInputLayout.isErrorEnabled = false
             }
         }
     }
@@ -46,28 +47,27 @@ class RegisterActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         binding.apply {
-            textEditTextEmail.removeTextChangedListener(textWatcherEmail)
-            textEditTextPassword.removeTextChangedListener(textWatcherPassword)
+            emailTextEditText.removeTextChangedListener(textWatcherEmail)
+            passwordTextEditText.removeTextChangedListener(textWatcherPassword)
         }
-
     }
 
     private fun setListeners() {
         with(binding) {
 
-            buttonRegister.setOnClickListener {
+            registerButton.setOnClickListener {
 
-                val email = textEditTextEmail.text.toString()
-                val password = textEditTextPassword.text.toString()
+                val email = emailTextEditText.text.toString()
+                val password = passwordTextEditText.text.toString()
 
                 val emailValid = Validator.isEmailValid(email)
                 val passwordValid = Validator.isPasswordValid(password)
 
                 if (!emailValid) {
-                    textInputLayoutEmail.error = getString(R.string.incorrect_email)
+                    emailTextInputLayout.error = getString(R.string.incorrect_email)
                 }
                 if (!passwordValid) {
-                    textInputLayoutPassword.error = getString(R.string.incorrect_password)
+                    passwordTextInputLayout.error = getString(R.string.incorrect_password)
                 }
 
                 if (emailValid && passwordValid) {
@@ -87,10 +87,12 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun autoLogin() {
         runBlocking { //crutch
-            val email = dataSource.getString(Constants.LOGIN_KEY)
-            val password = dataSource.getString(Constants.PASSWORD_KEY)
-            if (email != null && password != null) {
-                goToProfile(email.toString())
+            dataSource.apply {
+                val email = getString(Constants.LOGIN_KEY)
+                val password = getString(Constants.PASSWORD_KEY)
+                if (email != null && password != null) {
+                    goToProfile(email.toString())
+                }
             }
         }
     }

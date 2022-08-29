@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:splitMotionEvents="false"
-    tools:context=".ui.ProfileActivity">
+    tools:context=".ui.profile.ProfileActivity">
 
     <View
         android:id="@+id/viewToContainer"
@@ -97,7 +97,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonEditProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineThird"
+        app:layout_constraintTop_toBottomOf="@id/thirdGuidelineProfile"
         app:layout_constraintVertical_bias="0.11" />
 
     <com.google.android.material.button.MaterialButton
@@ -139,10 +139,10 @@
         android:id="@+id/facebookVecIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineThird"
+        app:layout_constraintBottom_toBottomOf="@id/thirdGuidelineProfile"
         app:layout_constraintEnd_toStartOf="@+id/linkedInVecIcon"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/guidelineFirst"
+        app:layout_constraintStart_toStartOf="@+id/firstGuidelineProfile"
         app:layout_constraintTop_toTopOf="@+id/viewBottomContainer"
         app:srcCompat="@drawable/f_vec_icon" />
 
@@ -159,27 +159,27 @@
         android:id="@+id/vkVecIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/guidelineSecond"
+        app:layout_constraintEnd_toEndOf="@id/firstGuideline"
         app:layout_constraintStart_toEndOf="@+id/linkedInVecIcon"
         app:layout_constraintTop_toTopOf="@+id/linkedInVecIcon"
         app:srcCompat="@drawable/vk_vec_icon" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineFirst"
+        android:id="@+id/firstGuidelineProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.16" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineSecond"
+        android:id="@+id/firstGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.84" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineThird"
+        android:id="@+id/thirdGuidelineProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

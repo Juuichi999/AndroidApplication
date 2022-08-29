@@ -8,35 +8,43 @@
     android:splitMotionEvents="false">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewHello"
+        android:id="@+id/helloTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/hello2"
         android:textColor="@color/white"
         android:textSize="@dimen/textSize_24sp"
-        app:layout_constraintBottom_toTopOf="@id/textViewInfo"
+        app:layout_constraintBottom_toTopOf="@id/infoTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineSecond"
+        app:layout_constraintTop_toBottomOf="@id/firstGuideline"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewInfo"
+        android:id="@+id/infoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/marginOffset_8dp"
         android:fontFamily="@font/open_sans_semibold"
-        android:text="@string/reg_info"
+        android:text="@string/register_info"
         android:textColor="@color/white"
         android:textSize="@dimen/textSize_12sp"
-        app:layout_constraintBottom_toTopOf="@id/textInputLayoutEmail"
+        app:layout_constraintBottom_toTopOf="@id/emailTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewHello" />
+        app:layout_constraintTop_toBottomOf="@id/helloTextView" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutEmail"
+        android:id="@+id/emailTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginTop20dp"
@@ -45,13 +53,13 @@
         app:errorEnabled="true"
         app:expandedHintEnabled="false"
         app:hintTextAppearance="@style/TextLabel"
-        app:layout_constraintBottom_toTopOf="@id/textInputLayoutPassword"
+        app:layout_constraintBottom_toTopOf="@id/passwordTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewInfo">
+        app:layout_constraintTop_toBottomOf="@id/infoTextView">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditTextEmail"
+            android:id="@+id/emailTextEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/darkBlue"
@@ -61,7 +69,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutPassword"
+        android:id="@+id/passwordTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/password"
@@ -73,10 +81,10 @@
         app:layout_constraintBottom_toTopOf="@id/rememberUserCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail">
+        app:layout_constraintTop_toBottomOf="@id/emailTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditTextPassword"
+            android:id="@+id/passwordTextEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/darkBlue"
@@ -91,11 +99,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/white"
+        android:checked="false"
         android:text="@string/ch_box_reg"
         android:textColor="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@id/guidelineFirst"
+        app:layout_constraintBottom_toTopOf="@id/secondGuideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+        app:layout_constraintTop_toBottomOf="@id/passwordTextInputLayout" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/forgotPasswordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/forgot_your_password"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_14sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/rememberUserCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordTextInputLayout" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.64" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signInGoogleButton"
@@ -108,15 +139,15 @@
         app:icon="@drawable/google_icon"
         app:iconGravity="textStart"
         app:iconTint="@null"
-        app:layout_constraintBottom_toTopOf="@id/textViewOr"
+        app:layout_constraintBottom_toTopOf="@id/orTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineFirst"
+        app:layout_constraintTop_toBottomOf="@id/rememberUserCheckBox"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewOr"
+        android:id="@+id/orTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginOffset_8dp"
@@ -125,13 +156,13 @@
         android:text="@string/or"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/buttonRegister"
+        app:layout_constraintBottom_toTopOf="@id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signInGoogleButton" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonRegister"
+        android:id="@+id/registerButton"
         style="@style/OutlineButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -139,29 +170,15 @@
         android:textColor="@color/white"
         android:textSize="@dimen/textSize_16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/textViewAgreement"
+        app:layout_constraintBottom_toTopOf="@id/agreementTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewOr"
+        app:layout_constraintTop_toBottomOf="@id/orTextView"
         app:strokeColor="@color/orange" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineFirst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.64" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineSecond"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.23" />
-
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewAgreement"
+        android:id="@+id/agreementTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginOffset_8dp"
@@ -172,14 +189,14 @@
         android:text="@string/agreement"
         android:textColor="@color/white"
         android:textSize="@dimen/textSize_12sp"
-        app:layout_constraintBottom_toTopOf="@id/textViewHaveAccount"
+        app:layout_constraintBottom_toTopOf="@id/haveAccountTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonRegister"
+        app:layout_constraintTop_toBottomOf="@id/registerButton"
         app:layout_constraintWidth_percent="0.66" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewHaveAccount"
+        android:id="@+id/haveAccountTextView"
         style="@style/LightGrayText14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -187,16 +204,18 @@
         android:maxLines="2"
         android:text="@string/have_account"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/signIn"
+        app:layout_constraintEnd_toStartOf="@id/signInTextView"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAgreement" />
+        app:layout_constraintTop_toBottomOf="@+id/agreementTextView" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/signIn"
+        android:id="@+id/signInTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginOffset_8dp"
+        android:clickable="true"
+        android:focusable="true"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/sign_in"
         android:textColor="@color/white"
@@ -204,6 +223,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textViewHaveAccount"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAgreement" />
+        app:layout_constraintStart_toEndOf="@id/haveAccountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/agreementTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
